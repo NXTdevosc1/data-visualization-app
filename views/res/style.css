@@ -1,0 +1,266 @@
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: 'TT Norms Pro', sans-serif;
+}
+
+
+body.dark {
+    background-color: #28292A;
+}
+
+body.dark * {
+    color: rgba(235, 235, 225, 0.9);
+
+}
+
+.gradient {
+    background-image: linear-gradient(45deg, #492BF5, #F610C5);
+    width: fit-content;
+
+}
+
+.gradienttext {
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-size: 100%;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    background-clip: text;
+}
+
+#title {
+    font-size: 5em;
+    font-weight: 700;
+    margin-top: 1.8em;
+}
+
+#topbar h1 a {
+    color: rgba(10, 10, 40, 0.9);
+}
+
+body.dark #topbar h1 a {
+    color: rgba(240, 240, 250, 0.9);
+}
+
+#topbar {
+    width: 95%;
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0);
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #a9b3bb;
+    height: 60px;
+    background-color: white;
+    z-index: 1;
+}
+
+body.dark #topbar {
+    background-color: inherit;
+}
+
+#content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 60px;
+    width: 100%;
+    max-height: calc(100% - 60px);
+    height: calc(100% - 60px);
+}
+
+#intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    padding: 0 4em;
+    text-align: left;
+    margin-bottom: 3em;
+}
+
+#intro p {
+    font-size: 1.5em;
+    margin-top: 1em;
+    margin-bottom: 4em;
+}
+
+#intro button {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+button {
+    cursor: pointer;
+}
+a{
+    width: fit-content;
+}
+.btnstyle0 a {
+    color: white;
+}
+.btnstyle0 {
+    padding: 11px 32px;
+    font-size: 17px;
+    font-weight: 500;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    transition: 120ms linear;
+}
+
+.btnstyle0:hover {
+    background-image: linear-gradient(45deg, #492bf5ec, #f610c4ef);
+    box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.25);
+}
+
+.btnstyle0:active {
+    background-color: black;
+}
+
+#capabilities {
+    position: relative;
+    top: 1em;
+    display: flex;
+    width: 70%;
+    align-items: center;
+    justify-content: center;
+    left: 50%;
+    transform: translate(-50%,0);
+    flex-direction: column;
+    table-layout: auto;
+}
+
+#capabilities nav {
+    display: flex;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2em 0;
+    margin: 1em 0;
+}
+
+#capabilities .cell {
+    position: relative;
+    flex: 1;
+
+    width: 50%;
+    padding: 20px;
+
+    /* border-radius: 12px; */
+    /* box-shadow: 0 0 8px 2px rgba(140, 140, 140, 0.25); */
+    color: black;
+    /* background-image: linear-gradient(45deg, #B8BFC740, #FFFFFF); */
+    /* border-bottom: 2px solid rgba(0, 0, 0, 0.25); */
+
+    /* border: 3px solid #E2E8EF50; */
+}
+
+
+body.dark #intro p {
+    color: white;
+}
+
+#capabilities .cell div {
+    display: flex;
+    align-items: center;
+}
+
+#capabilities i {
+    font-size: 2.5em;
+    margin-right: .5em;
+}
+
+#capabilities h2 {
+    font-weight: 500;
+    font-size: 1.5em;
+}
+
+
+
+@media only screen and (max-width: 1150px) {
+    #capabilities {
+        width: auto;
+    }
+}
+
+
+@media only screen and (max-width: 1000px) {
+    #intro {
+        justify-content: center;
+        align-items: center;
+    }
+    #intro button {
+        left: 0;
+        transform: translate(0, 0);
+    }
+
+    #title {
+        margin-top: 3em;
+    }
+    #capabilities nav {
+        display: flex;
+        flex-direction: column;
+        border-spacing: 0;
+        margin: 0;
+    }
+    #capabilities nav .cell {
+        display: block;
+        width: auto;
+        margin: 1em 0.5em;
+        border-radius: 0;
+        background: none;
+    }
+    
+  }
+
+  @media only screen and (max-width: 600px) {
+    #title {
+        font-size: 4em;
+    }
+  }
+
+#modeswitch {
+    font-size: 1.25em;
+    cursor: pointer;
+}
+
+.btnicon {
+    position: relative;
+    width: 2em;
+    height: 2em;
+    border-radius: 50px;
+    background-color: #492BF5;
+    border: none;
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    transition: 120ms linear;
+}
+
+.split {
+    display: flex;
+    align-items: center;
+}
+
+#projectlist {
+    padding: 2em 1em;
+    border-right: 1px solid grey;
+    height: 100%;
+    width: fit-content;
+}
+
+#projectlist .hdr div{
+    width: 14em;
+    position: relative;
+    /* left: -0.8em; */
+}
+
+#projectlist .hdr p {
+    font-size: 0.8em;
+}
