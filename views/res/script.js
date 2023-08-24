@@ -45,11 +45,13 @@ function togglecolormode() {
     }
 }
 
+if(!acc) {
+    function login() {
+        event.preventDefault();
+        console.log("hello world");
+        msl.loginRedirect(_msscope);
+    }
 
-
-function login() {
-    
-    console.log("hello world");
-    msl.loginRedirect(_msscope);
 }
+
 

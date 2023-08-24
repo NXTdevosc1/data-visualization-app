@@ -220,13 +220,17 @@ body.dark #intro p {
         border-radius: 0;
         background: none;
     }
-    
   }
-
-  @media only screen and (max-width: 600px) {
+  #intro a {
+    position:relative;
+    left:50%;
+    transform:translate(-50%, 0);
+}
+  @media only screen and (max-width: 800px) {
     #title {
         font-size: 4em;
     }
+    
   }
 
 #modeswitch {
