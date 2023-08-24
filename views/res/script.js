@@ -46,24 +46,6 @@ function togglecolormode() {
 }
 
 
-const _msalcfg = {
-    auth: {
-      clientId: "acdfc600-5b40-4ca7-8385-82f768109728",
-      authority: "https://login.microsoftonline.com/de13b4a0-e97e-4d79-883b-742dc5839812",
-        redirectUI: 'http://localhost'
-    },
-    cache: {
-      cacheLocation: "sessionStorage",
-      storeAuthStateInCookie: false
-    }
-  }
-
-const msl = new msal.PublicClientApplication(_msalcfg);
-
-
-const _msscope = {
-    scope: ['User.Read']
-};
 
 function login() {
     
@@ -71,15 +53,3 @@ function login() {
     msl.loginRedirect(_msscope);
 }
 
-if(!msl.getActiveAccount()) {
-    msl.handleRedirectPromise().then((res) => {
-        if(res) {
-            msl.setActiveAccount(res);
-            window.location.href = '/dashboard';
-        }
-    }).catch((err) => {
-        console.log("MS Error", err);
-    })
-} else {
-    console.log("Active account:", msl.getActiveAccount());
-}

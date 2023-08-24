@@ -24,7 +24,7 @@ app.set('views', __dirname+'/views');
 app.set('view engine','ejs');
 app.engine('ejs', require('ejs').__express);
 app.use(cookies.express("a","b","c"));
-app.use(require('./auth'));
+app.use('/api', require('./api'));
 
 app.get('/', (req, res) => {
     res.render('home');

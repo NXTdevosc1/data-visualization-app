@@ -44,6 +44,44 @@ disabled
       href="https://site-assets.fontawesome.com/releases/v6.4.0/css/sharp-light.css"
     >
 
+<script>
+  
+const _msalcfg = {
+    auth: {
+      clientId: "acdfc600-5b40-4ca7-8385-82f768109728",
+      authority: "https://login.microsoftonline.com/de13b4a0-e97e-4d79-883b-742dc5839812",
+        redirectUI: 'http://localhost'
+    },
+    cache: {
+      cacheLocation: "sessionStorage",
+      storeAuthStateInCookie: false
+    }
+  }
+
+const msl = new msal.PublicClientApplication(_msalcfg);
+
+
+const _msscope = {
+    scope: ['User.Read']
+};
+
+  const acc = msl.getActiveAccount();
+
+  if(!acc) {
+    msl.handleRedirectPromise().then((res) => {
+        if(res) {
+            msl.setActiveAccount(res);
+            window.location.href = '/dashboard';
+        }
+    }).catch((err) => {
+        console.log("MS Error", err);
+    })
+} else {
+    console.log("Active account:", acc);
+}
+
+</script>
+
 </head>
 
 
@@ -51,6 +89,20 @@ disabled
     <nav style="width: 100%;">
         <h1><a href="/">DVA</a></h1>
     </nav>
+    <nav id="tbright">
+
+    <script>
+      const tb = document.getElementById("tbright");
+      if(acc) {
+        tb.innerHTML += `
+        
+        <p>${acc.name}</p>
+        
+        `
+      }
+      </script>
     <i class="fa-regular fa-sun-bright" id="modeswitch" onclick="togglecolormode();"></i>
-</nav>
+    </nav>
+      
+  </nav>
 <script src="/res/script.js"></script>
