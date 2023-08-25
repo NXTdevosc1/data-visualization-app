@@ -50,7 +50,7 @@ const _msalcfg = {
     auth: {
       clientId: "acdfc600-5b40-4ca7-8385-82f768109728",
       authority: "https://login.microsoftonline.com/de13b4a0-e97e-4d79-883b-742dc5839812",
-        redirectUI: 'http://localhost'
+      redirectUri: `${window.location.protocol}//${window.location.hostname}/api/auth`
     },
     cache: {
       cacheLocation: "sessionStorage",
@@ -70,7 +70,9 @@ const _msscope = {
   if(!acc) {
     msl.handleRedirectPromise().then((res) => {
         if(res) {
+          
             msl.setActiveAccount(res);
+            document.cookie = `accid=${msl.getActiveAccount().localAccountId};`
             window.location.href = '/dashboard';
         }
     }).catch((err) => {
@@ -97,12 +99,16 @@ const _msscope = {
         tb.innerHTML += `
         
         <p>${acc.name}</p>
-        
         `
       }
       </script>
     <i class="fa-regular fa-sun-bright" id="modeswitch" onclick="togglecolormode();"></i>
-    </nav>
+  <script>
+    if(acc) {
+      tb.innerHTML += `<a id='logout' href='/disconnect' class='textcolor'><i class="fa-solid fa-arrow-right-from-bracket"></i></a>`
+    }
+  </script>  
+  </nav>
       
   </nav>
 <script src="/res/script.js"></script>

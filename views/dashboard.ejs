@@ -1,5 +1,4 @@
 <%- include('topbar.ejs') %>
-
 <div id="content">
     
 
@@ -9,9 +8,42 @@
                 <h3>Projects    </h3>
                 <p>Browse projects...</p>
             </div>
-            <button class="btnicon"><i class="fa-sharp fa-regular fa-plus"></i></button>
+            <button class="btnicon" type="button" onclick="popupupload()">
+                <i class="fa-sharp fa-regular fa-plus"></i>
+            </button>
         </div>
-
+        <br>
+        <% for(var i=0; i < files.length;i++) {%>
+            <div class="file split">
+                <div class="split">
+                <% if(files[i].type == 0) {%>
+                    <i class="fa-regular fa-file-csv"></i>
+                <% } else { %>
+                    <i class="fa-regular fa-file-code"></i>
+                <% }%>
+                <h3><%= files[i].displayname %></h3>
+                </div>
+                <i onclick="deletefile(<%=files[i].ID%>)" class="fa-regular fa-xmark"></i>
+            </div>
+        <% } %>
     </nav>
     <nav id="projectcontent"></nav>
+</div>
+
+<div id="uploadform" style="display: none;" class="isolate">
+    <form action="/api/upload" id="uploadf" method="post" enctype="multipart/form-data">
+        <h2>Upload File</h2>
+
+        <div>
+            <label>Choose your file:</label>
+            <input type="file" name="content" required accept=".csv, .json">
+        </div>
+        <div>
+            <label>Display name :</label>
+            <input type="text" maxlength="32" class="itext1" name="displayname" required placeholder="Type a display name for the file">
+        </div>
+        <br>
+        <br>
+        <button type="submit" class="btnstyle0 gradient" style="justify-self: center;">Submit</button>
+    </form>
 </div>

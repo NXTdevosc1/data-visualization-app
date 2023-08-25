@@ -14,6 +14,66 @@ mysql.connect((err) => {
 })
 
 
+router.get('/api/auth', (req, res) => {
+    res.render("topbar");
+})
 
+router.post('/api/upload', (req, res) => {
+    const accid = req.cookies.get('accid');
+    if(typeof req.body.displayname != 'string' ||
+    req.body.displayname.length > 60 ||
+    !req.files || !req.files.content || typeof accid != "string"
+    ) return res.send('Unauthorized');
+    
+    const file = req.files.content;
+
+    let type;
+    if(file.name.endsWith('.csv')) {
+        type = 0;
+    } else if(file.name.endsWith('.json')) {
+        type = 1;
+    } else {
+        return res.send("Invalid file type.");
+    }
+
+    const displayname = req.body.displayname;
+    mysql.query('INSERT INTO data (account_id, type, displayname) VALUES(?, ?, ?)', [accid, type, displayname], (err, result) => {
+        if(err) throw err;
+        console.log("insert id", result.insertId);
+        file.mv(`./uploads/${result.insertId}`, (err) => {
+            if(err) throw err;
+
+            res.redirect('/dashboard');
+        })
+    });
+
+})
+
+router.post("/api/getfile", (req, res) => {
+    const accid = req.cookies.get("accid");
+    const fileid = req.body.fileid;
+    if(typeof fileid != 'number' || typeof accid != 'string') {
+        return res.send("401");
+    }
+
+    mysql.query("SELECT * FROM data WHERE ID=? LIMIT 1", [fileid], (err, [result]) => {
+        console.log(result);
+        res.send("200");
+    })
+})
+
+router.get('/dashboard', (req, res) => {
+    if(typeof req.cookies.get('accid') != 'string') return res.redirect('/disconnect');
+
+    mysql.query("SELECT * FROM data WHERE account_id=?", [req.cookies.get("accid")], (err, result) => {
+        if(err) throw err;
+        console.log(result);        
+        res.render('dashboard', {
+            files: result
+        });
+
+    })
+
+})
 
 module.exports = router;

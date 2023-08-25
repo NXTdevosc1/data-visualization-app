@@ -24,14 +24,16 @@ app.set('views', __dirname+'/views');
 app.set('view engine','ejs');
 app.engine('ejs', require('ejs').__express);
 app.use(cookies.express("a","b","c"));
-app.use('/api', require('./api'));
+app.use(require('./api'));
 
 app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/dashboard', (req, res) => {
-    res.render('dashboard');
+
+
+app.get('/disconnect', (req, res) => {
+    res.render("disconnect");
 })
 
 app.get('*',(req,res)=>{

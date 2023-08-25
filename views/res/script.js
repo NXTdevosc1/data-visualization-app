@@ -48,10 +48,17 @@ function togglecolormode() {
 if(!acc) {
     function login() {
         event.preventDefault();
-        console.log("hello world");
         msl.loginRedirect(_msscope);
     }
 
+} 
+else {
+    function popupupload() {
+
+        document.getElementById("uploadform").style.display = 'block';
+    }
+    function upload() {
+        document.getElementById('userid').value = msl.getActiveAccount().localAccountId;
+        document.getElementById('uploadf').submit();
+    }
 }
-
-

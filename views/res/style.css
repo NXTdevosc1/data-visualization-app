@@ -254,6 +254,10 @@ body.dark #intro p {
 .split {
     display: flex;
     align-items: center;
+    width: 100%;
+}
+.split div {
+    width: 100%;
 }
 
 #projectlist {
@@ -276,10 +280,105 @@ body.dark #intro p {
 #tbright {
     display: flex;
     width: auto;
+    align-items: center;
 }
 
 #tbright p {
     width: max-content;
     font-size: 1em;
     margin-right: 2em;
+}
+
+.isolate {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+}
+
+.isolate form {
+    position: fixed;
+    padding: 30px;
+    width: 45%;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 0 1em 2px grey;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.isolate form * {
+    width: 100%;
+}
+.isolate form div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+}
+
+.isolate form div * {
+    margin-top: 0.5em;
+}
+
+.itext1 {
+    margin-top: 1px;
+    padding: 10px;
+    width: 100%;
+    background-color: transparent;
+    color:black;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 400;
+    transition: 120ms linear;
+}
+
+.itext1:focus {
+    border-color: #492BF5;
+}
+
+.itext1::placeholder {
+    color: rgb(161, 161, 161);
+}
+
+.textcolor {
+    color: black;
+}
+body.dark .textcolor {
+    color: white;
+}
+#logout {
+    margin-left: 0.8em;
+    font-size: 1.3em;
+}
+
+.file {
+    padding: 1.3em;
+    cursor: pointer;
+    margin-top: 3px;
+    border-radius: 5px;
+}
+
+.file:hover {
+    background-color: rgba(0, 0, 10, 0.05);
+}
+.file:active {
+    background-color: rgba(0, 0, 10, 0.08);
+}
+
+.file i {
+    font-size: 1.5em;
+}
+
+.file i.fa-xmark {
+    font-size: 1em;
+    color: grey;
+}
+
+.file h3 {
+    margin-left: 0.5em;
 }
