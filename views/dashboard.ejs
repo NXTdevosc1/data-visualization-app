@@ -1,6 +1,7 @@
 <%- include('topbar.ejs') %>
 <div id="content">
     
+<div class="split" style="height: 100%;">
 
     <nav id="projectlist">
         <div class="split hdr">
@@ -14,23 +15,30 @@
         </div>
         <br>
         <% for(var i=0; i < files.length;i++) {%>
-            <div class="file split" onclick="openproject(<%=files[i].ID%>)">
+            <button class="file split" onclick="openproject(<%=files[i].ID%>)">
                 <div class="split">
-                <% if(files[i].type == 0) {%>
+                <%if(files[i].type == 0) {%>
                     <i class="fa-regular fa-file-csv"></i>
                 <% } else { %>
                     <i class="fa-regular fa-file-code"></i>
                 <% }%>
                 <h3><%= files[i].displayname %></h3>
                 </div>
-            </div>
+            </button>
         <% } %>
+
     </nav>
     <nav id="projectcontent">
-        <h1>Project name</h1>
+        <label class="noproj">No project selected</label>
     </nav>
 </div>
 
+</div>
+<% if(files.length) { %>
+<script>
+    openproject(<%=files[0].ID%>);
+</script>
+<% } %>
 <div id="uploadform" style="display: none;" class="isolate">
     <form action="/api/upload" id="uploadf" method="post" enctype="multipart/form-data">
         <h2>Upload File</h2>

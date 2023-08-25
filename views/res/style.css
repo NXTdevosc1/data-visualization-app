@@ -359,9 +359,11 @@ body.dark .textcolor {
 .file {
     padding: 1.3em;
     cursor: pointer;
-    margin-top: 3px;
     border-radius: 5px;
     z-index: -1;
+    background: none;
+    border: none;
+    transition: 120ms linear;
 }
 
 .file:hover {
@@ -387,4 +389,78 @@ body.dark .textcolor {
 .file h3 {
     margin-left: 0.5em;
     font-weight: 500;
+}
+
+#projectcontent {
+    display: block;
+    height: 100%;
+    padding: 2em;
+    width: 100%;
+}
+
+.noproj {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: rgb(178, 188, 196);
+    font-size: 1.2em;
+    font-weight: 500;
+}
+
+.btcursordisabled {
+    cursor: default;
+}
+.btcursordisabled:hover {
+    background: none;
+}
+.btcursordisabled:active {
+    background: none;
+}
+
+#projectcontent .header div {
+    margin-left: 1em;
+}
+#projectcontent .header label {
+    font-size: 0.8em;
+}
+#projectcontent .header i {
+    font-size: 2em;
+}
+
+#projectcontent .header button {
+    margin-left: 1em;
+}
+
+.iconbtn {
+    display: flex;
+    align-items: center;
+    background-color: #492BF5;
+    border-radius: 5px;
+    border: 2px solid #492BF5;
+    color: white;
+    font-weight: 400;
+    font-size: 1em;
+    padding: 6px 14px;
+    transition: 120ms linear;
+}
+.iconbtn:hover {
+    background-color: #5238e9;
+}
+.iconbtn:active {
+    background-color: #3a1fd4;
+}
+.iconbtn i {
+    margin-right: 0.4em;
+}
+
+.captionbtn {
+    background: none;
+    color: #492BF5;
+}
+.captionbtn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+.captionbtn:active {
+    background: rgba(0, 0, 0, 0.08);
 }

@@ -49,16 +49,35 @@ router.post('/api/upload', (req, res) => {
 
 })
 
-router.post("/api/getfile", (req, res) => {
+/**
+ * 
+ * @param {Request} req 
+ */
+function CheckPostHeader(req, res) {
+    if(req.get('content-type') != 'application/json') {
+        res.status(401);
+        res.send("Invalid headers");
+    }
+}
+
+const fs = require('fs');
+
+router.post("/api/open", (req, res) => {
+    CheckPostHeader(req, res);
     const accid = req.cookies.get("accid");
     const fileid = req.body.fileid;
     if(typeof fileid != 'number' || typeof accid != 'string') {
+        res.status(401);
         return res.send("401");
     }
 
     mysql.query("SELECT * FROM data WHERE ID=? LIMIT 1", [fileid], (err, [result]) => {
+        if(result.account_id != accid) {
+            res.status(401);
+            return res.send('401');
+        }
         console.log(result);
-        res.send("200");
+        res.json({settings: result, file: fs.readFileSync(`./uploads/${result.ID}`).toString()});
     })
 })
 
