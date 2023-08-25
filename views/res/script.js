@@ -61,4 +61,13 @@ else {
         document.getElementById('userid').value = msl.getActiveAccount().localAccountId;
         document.getElementById('uploadf').submit();
     }
+
+    function deleteproject(projid) {
+        console.log("delete");
+    }
+    function openproject(projid) {
+        console.log("open");
+    }
+
+    
 }

@@ -63,7 +63,7 @@ body.dark #topbar h1 a {
     height: 60px;
     background-color: inherit;
 
-    z-index: 1;
+    z-index: 999;
 }
 
 
@@ -294,7 +294,7 @@ body.dark #intro p {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 5;
+    z-index: 1000;
 }
 
 .isolate form {
@@ -361,6 +361,7 @@ body.dark .textcolor {
     cursor: pointer;
     margin-top: 3px;
     border-radius: 5px;
+    z-index: -1;
 }
 
 .file:hover {
@@ -377,8 +378,13 @@ body.dark .textcolor {
 .file i.fa-xmark {
     font-size: 1em;
     color: grey;
+    z-index: 1;
+    position: relative;
+    height: 1em;
+    width: 1em;
 }
 
 .file h3 {
     margin-left: 0.5em;
+    font-weight: 500;
 }
