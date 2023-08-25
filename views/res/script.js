@@ -68,6 +68,7 @@ else {
 
     var currentproject = null;
     function openproject(projid) {
+        if(currentproject && currentproject.settings.ID == projid) return;
         const content = document.getElementById("projectcontent");
         const plist = document.querySelectorAll("#projectlist .file");
         plist.forEach((p) => {
@@ -87,9 +88,13 @@ else {
             return res.json();
         }).then((res) => {
             console.log(res);
+            if(currentproject) {
+                delete currentproject.Chart;
+                delete currentproject;
+            }
             currentproject = res;
             content.innerHTML = `
-            <div class="header split">
+            <nav class="header split" style='height: fit-content;'>
 
                 ${res.settings.type == 0 ? '<i class="fa-regular fa-file-csv"></i>' : '<i class="fa-regular fa-file-code"></i>'}
                 <div><h1>${res.settings.displayname}</h1>
@@ -99,13 +104,23 @@ else {
                 <button class='iconbtn' onclick='projectexport();'><i style='font-size: 1.1em;' class="fa-light fa-file-export"></i>Export</button>
                 <button class='iconbtn captionbtn' onclick='projectsave();'><i style='font-size: 1.1em;' class="fa-light fa-floppy-disk"></i>Save</button>
 
+            </nav>
+
+
+                <nav><canvas id="activechart"></canvas></nav>
+                <nav>
+                <div id='selectplots'>
+                    <button onclick="displaytable()"></button>
+                    <button onclick="displaytable()"></button>
+                    <button onclick="displaytable()"></button>
+
+                    <button onclick="displaytable()"></button>
+
                 </div>
-
-
-                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                </nav>
                 `;
                 
-                const myChart = new Chart('myChart', {
+                currentproject.Chart = new Chart('activechart', {
                     type: 'bar',
                     data: {
                         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],

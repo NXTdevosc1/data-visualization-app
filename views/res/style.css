@@ -73,8 +73,8 @@ body.dark #topbar h1 a {
     left: 0;
     padding-top: 60px;
     width: 100%;
-    max-height: calc(100% - 60px);
-    height: calc(100% - 60px);
+    height: 100%;
+    overflow: hidden;
 }
 
 #intro {
@@ -389,16 +389,25 @@ body.dark .textcolor {
 .file h3 {
     margin-left: 0.5em;
     font-weight: 500;
+    text-align: start;
 }
 
 #projectcontent {
-    display: block;
+    position: relative;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     padding: 2em;
     width: 100%;
 }
 
+#projectcontent nav {
+    height: 100%;
+}
+
 .noproj {
+    width: fit-content;
     position: relative;
     left: 50%;
     top: 50%;
@@ -437,7 +446,7 @@ body.dark .textcolor {
     align-items: center;
     background-color: #492BF5;
     border-radius: 5px;
-    border: 2px solid #492BF5;
+    border: 1px solid #492BF5;
     color: white;
     font-weight: 400;
     font-size: 1em;
@@ -463,4 +472,43 @@ body.dark .textcolor {
 }
 .captionbtn:active {
     background: rgba(0, 0, 0, 0.08);
+}
+
+#activechart {
+    width: auto;
+    height: auto;
+    max-width: 45em;
+    max-height: 30em;
+
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+#selectplots {
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    padding: 10px;
+    align-self: center;
+    width: 80%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex-wrap: nowrap;
+    height: 100px;
+    max-height: 100px;
+}
+
+
+#selectplots button {
+    width: 80px;
+    height: 60px;
+    min-width: 80px;
+    min-height: 60px;
+    margin-bottom: 40px;
+    background: rgba(0, 0, 30, 0.08);
+    border-radius: 5px;
+    border: none;
+    /* border: 1px solid #5238e9; */
+    margin: 0 0.25em;
 }

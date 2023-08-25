@@ -51,8 +51,8 @@ disabled
   
 const _msalcfg = {
     auth: {
-      clientId: "acdfc600-5b40-4ca7-8385-82f768109728",
-      authority: "https://login.microsoftonline.com/de13b4a0-e97e-4d79-883b-742dc5839812",
+      clientId: "0e4ee651-9efd-4397-9693-9e81d392e237",
+      authority: "https://login.microsoftonline.com/common",
       redirectUri: `${window.location.protocol}//${window.location.hostname}/api/auth`
     },
     cache: {
@@ -75,7 +75,7 @@ const _msscope = {
         if(res) {
           
             msl.setActiveAccount(res);
-            document.cookie = `accid=${msl.getActiveAccount().localAccountId};`
+            document.cookie = `accid=${msl.getActiveAccount().homeAccountId};`
             window.location.href = '/dashboard';
         }
     }).catch((err) => {
