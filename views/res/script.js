@@ -106,55 +106,66 @@ else {
 
             </nav>
 
+                <nav class='split' id='workarea'>
 
-                <nav><canvas id="activechart"></canvas></nav>
-                <nav>
-                <h2>Charts</h2>
+                <div class='sidebar'>
+                <h2>Visualization</h2>
+                <label>Choose how you want the image to be displayed</label>
+                <br>
+                
+                <hr/>
+                <br>
                 <div class='display'>
+                <label style='margin-bottom:20px;'>Display type:</label>
+                
                 <div>
                 
                 <label><input type='radio' name='choosedisplay' checked/> Table</label>
                 </div>
                 <div>
-                <input type='radio' name='choosedisplay' value='Graphical Charts'/>
-                <label>Graphical</label>
+                
+                <label><input type='radio' name='choosedisplay' value='Graphical Charts'/> Graphical</label>
 
                 </div>
 
-                <div id='selectplots'>
-                    <button onclick="displaytable()">
+                <select id='selectplots'>
+                    <option onclick="displaytable()">
                         <img src='/res/barchart.png' alt='Bar Chart'/>
                         <label>Bar</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/linechart.png' alt='Line Chart'/>
                         <label>Line</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/bubblechart.png' alt='Bubble Chart'/>
                         <label>Bubble</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/doughnutchart.png' alt='Doughnout Chart'/>
                         <label>Doughnut</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/piechart.png' alt='Pie Chart'/>
                         <label>Pie</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/polarareachart.png' alt='Polar Area Chart'/>
                         <label>Polar Area</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/radarchart.png' alt='Radar Chart'/>
                         <label>Radar</label>
-                    </button>
-                    <button onclick="displaytable()">
+                    </option>
+                    <option onclick="displaytable()">
                         <img src='/res/scatterchart.png' alt='Scatter Chart'/>
                         <label>Scatter</label>
-                    </button>
+                    </option>
+                </select>
                 </div>
+                </div>
+                <div><canvas id="activechart"></canvas></div>
+                
                 </nav>
                 `;
                 

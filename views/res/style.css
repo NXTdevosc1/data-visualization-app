@@ -486,21 +486,15 @@ body.dark .textcolor {
 }
 
 #selectplots {
-    display: flex;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    padding: 10px;
-    align-self: center;
-    width: 80%;
-    overflow-x: auto;
-    overflow-y: hidden;
-    flex-wrap: nowrap;
-    height: 160px;
-    max-height: 160px;
+    padding: 0.6em 1.5em;
+    border-radius: 5px;
+    background: none;
+    border: 1px solid black;
+    cursor: pointer;
 }
 
 
-#selectplots button {
+#selectplots option {
     width: 110px;
     height: 120px;
     min-width: 110px;
@@ -518,13 +512,47 @@ body.dark .textcolor {
     margin: 0 0.25em;
     transition: 120ms linear;
 }
+#workarea {
+    height: 100%;
+}
+#workarea .sidebar {
+    width: 35%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    /* background: rgba(0, 0, 0, 0.05); */
+    border: 1px solid #3a1fd4;
+    margin-top: 1em;
+    border-radius: 10px;
+    margin-right: 2em;
+    max-width: 400px;
+    min-width: 250px;
+}
+hr {
+    width: 100%;
+    
+}
+#workarea .sidebar h2 {
+    align-self: flex-start;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+#workarea .sidebar label {
+    font-size: 0.8em;
+    color: rgba(0,0,0,0.75);
+    align-self: flex-start;
+}
 #selectplots button:focus {
     border-color: #492BF5;
 }
 #selectplots img {
-    position: relative;
+    position: absolute;
     width: 100%;
-    height: 85%;
-    margin-bottom: 0.2em;
+    height: 100%;
 
+}
+.display label,div {
+    margin-bottom: 0.5em;
 }
