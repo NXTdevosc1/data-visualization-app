@@ -109,13 +109,51 @@ else {
 
                 <nav><canvas id="activechart"></canvas></nav>
                 <nav>
+                <h2>Charts</h2>
+                <div class='display'>
+                <div>
+                
+                <label><input type='radio' name='choosedisplay' checked/> Table</label>
+                </div>
+                <div>
+                <input type='radio' name='choosedisplay' value='Graphical Charts'/>
+                <label>Graphical</label>
+
+                </div>
+
                 <div id='selectplots'>
-                    <button onclick="displaytable()"></button>
-                    <button onclick="displaytable()"></button>
-                    <button onclick="displaytable()"></button>
-
-                    <button onclick="displaytable()"></button>
-
+                    <button onclick="displaytable()">
+                        <img src='/res/barchart.png' alt='Bar Chart'/>
+                        <label>Bar</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/linechart.png' alt='Line Chart'/>
+                        <label>Line</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/bubblechart.png' alt='Bubble Chart'/>
+                        <label>Bubble</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/doughnutchart.png' alt='Doughnout Chart'/>
+                        <label>Doughnut</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/piechart.png' alt='Pie Chart'/>
+                        <label>Pie</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/polarareachart.png' alt='Polar Area Chart'/>
+                        <label>Polar Area</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/radarchart.png' alt='Radar Chart'/>
+                        <label>Radar</label>
+                    </button>
+                    <button onclick="displaytable()">
+                        <img src='/res/scatterchart.png' alt='Scatter Chart'/>
+                        <label>Scatter</label>
+                    </button>
                 </div>
                 </nav>
                 `;
