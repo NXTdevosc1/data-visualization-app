@@ -67,6 +67,7 @@ else {
     }
 
     var currentproject = null;
+    var display;
     function openproject(projid) {
         if(currentproject && currentproject.settings.ID == projid) return;
         const content = document.getElementById("projectcontent");
@@ -89,10 +90,11 @@ else {
         }).then((res) => {
             console.log(res);
             if(currentproject) {
-                delete currentproject.Chart;
+                display.destroy();
                 delete currentproject;
             }
             currentproject = res;
+            content.innerHTML='';
             content.innerHTML = `
             <nav class="header split" style='height: fit-content;'>
 
@@ -105,104 +107,52 @@ else {
                 <button class='iconbtn captionbtn' onclick='projectsave();'><i style='font-size: 1.1em;' class="fa-light fa-floppy-disk"></i>Save</button>
 
             </nav>
-
+                <br>
                 <nav class='split' id='workarea'>
 
-                <div class='sidebar'>
-                <h2>Visualization</h2>
-                <label>Choose how you want the image to be displayed</label>
-                <br>
-                
-                <hr/>
-                <br>
-                <div class='display'>
-                <label style='margin-bottom:20px;'>Display type:</label>
-                
-                <div>
-                
-                <label><input type='radio' name='choosedisplay' checked/> Table</label>
+                <div class='leftbar sidebar'>
+                    <div style='margin-right:2em;' class='leftleftbar'>
+                    <div class='split'>
+                    <div>
+                    <h2>Visualization</h2>
+                    <label>Choose how you want your image to be displayed</label>
+                    </div>
+                    </div>
+                    <table id='tabulardata'>
+                    
+                    </table>
                 </div>
-                <div>
                 
-                <label><input type='radio' name='choosedisplay' value='Graphical Charts'/> Graphical</label>
+<div class='____RIGHT_SIDE' id='custumization' style='width:fit-content;'>                
+
+                    
+
+</div>
 
                 </div>
+                <nav style='display:flex;flex-direction:column;width:100%;'>
+                <div style='height:100%;'><canvas id="activechart"></canvas></div>
 
-                <select id='selectplots'>
-                    <option onclick="displaytable()">
-                        <img src='/res/barchart.png' alt='Bar Chart'/>
-                        <label>Bar</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/linechart.png' alt='Line Chart'/>
-                        <label>Line</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/bubblechart.png' alt='Bubble Chart'/>
-                        <label>Bubble</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/doughnutchart.png' alt='Doughnout Chart'/>
-                        <label>Doughnut</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/piechart.png' alt='Pie Chart'/>
-                        <label>Pie</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/polarareachart.png' alt='Polar Area Chart'/>
-                        <label>Polar Area</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/radarchart.png' alt='Radar Chart'/>
-                        <label>Radar</label>
-                    </option>
-                    <option onclick="displaytable()">
-                        <img src='/res/scatterchart.png' alt='Scatter Chart'/>
-                        <label>Scatter</label>
-                    </option>
-                </select>
                 </div>
-                </div>
-                <div><canvas id="activechart"></canvas></div>
+                </nav>
                 
                 </nav>
                 `;
-                
-                currentproject.Chart = new Chart('activechart', {
-                    type: 'bar',
-                    data: {
-                        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        datasets: [{
-                            label: '# of Votes',
-                            data: [12, 19, 3, 5, 2, 3],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
+                document.querySelectorAll('input[name="choosedisplay"]').forEach((c) => {
+                    c.addEventListener('change', (ev) => {
+                        console.log("change", c, ev)
+                        if(c.value == 'gd') {
+                            document.getElementById('selectplots').removeAttribute('disabled');
+                            plotevt(document.getElementById('selectplots'));
+                        } else {
+                            document.getElementById('selectplots').setAttribute('disabled', '');
+
                         }
-                    }
-                });
+                    })
+                })
+
+
+                initchartcsv();
                 
 
             plist.forEach((p) => {
@@ -215,4 +165,163 @@ else {
     }
 
     
+}
+function setvalue(elem) {
+
+    if(elem.value == 'None') {
+        chartform.data.datasets[0].data.splice(chartform.data.datasets[0].data.indexOf(_currentsettingselem.innerText), 1);
+    } else {
+        chartform.data.datasets[0].data.push(_currentsettingselem.innerText);
+        
+    }
+    display.update();
+}
+
+var valdropdwn = [{Column: 'None', Value: null}];
+
+function rendervaldropdwn(elem) {
+    const vss = document.getElementById('valuesselection');
+    vss.innerHTML = '';
+    valdropdwn.forEach((v) => {
+        vss.innerHTML+=`<option>${v.Column}</option>`;
+    })
+}
+
+function togglecolumn(elem) {
+    const vss = document.getElementById('valuesselection');
+    if(elem.checked) {
+        console.log(_currentsettingselem.innerText)
+        chartform.data.labels.push(_currentsettingselem.innerText);
+        valdropdwn.push({Column: _currentsettingselem.innerText, Value: null});
+        rendervaldropdwn();
+        document.getElementById('valuesselection').setAttribute('disabled', '');
+    } else {
+        chartform.data.labels.splice(chartform.data.labels.indexOf(_currentsettingselem.innerText),1);
+        valdropdwn.forEach((v) => {
+            if(v.Column == _currentsettingselem.innerText) {
+                valdropdwn.splice(v, 1);
+            }
+        })
+        document.getElementById('valuesselection').removeAttribute('disabled');
+
+    }
+    display.update();
+}
+var chartform;
+var filedata;
+var _currentsettingselem = null;
+
+function initchartcsv() {
+    if(display) display.destroy();
+    console.log("csv:", currentproject.file);
+
+    // Inits in bar charts
+    chartform = {
+        type: 'bar',
+        data: {
+            labels: [],
+            datasets:[{
+                label: 'test',
+                data: []
+            }]
+            // datasets:[{
+            //     label: currentproject.settings.displayname,
+            //     data: []
+            // }]
+        }
+    };
+    const table = document.getElementById('tabulardata');
+    d3.csv(`/files/${currentproject.settings.ID}`).then((res) => {
+        console.log(res);
+        filedata = res;
+        console.log("length", res.length);
+
+        var inner = '<thead><tr>';
+        for(let c = 0;c<res.columns.length;c++) {
+            // display the columns
+            inner+=`<th onclick='settings(this, 0)'>${res.columns[c]}</th>`;
+        }
+        inner += '</tr></thead><tbody>';
+        for(var i = 0;i<res.length;i++) {
+
+
+            inner+='<tr>';
+            for(var c =0;c<res.columns.length;c++) {
+                inner+=`<td onclick='settings(this, 1)'>${res[i][res.columns[c]]}</td>`;
+            }
+            inner+='</tr>';
+        }
+        inner+='</tbody>';
+        table.innerHTML = inner;
+        display = new Chart('activechart', chartform);
+    })
+
+}
+
+function projectexport() {
+    var a = document.createElement('a');
+    a.href = display.toBase64Image();
+    a.download = 'export.png';
+    a.click();
+}
+
+function isColumn(elem) {
+    for(var i = 0;i<valdropdwn.length;i++){
+        if(valdropdwn[i].Column == elem.innerHTML) return true;
+    }
+    return false;
+}
+
+function isValue(elem) {
+    for(var i = 0;i<valdropdwn.length;i++){
+        if(valdropdwn[i].Value == elem.innerHTML) return true;
+    }
+    return false;
+}
+
+function settings(elem, type){
+    if(_currentsettingselem == elem) return;
+    if(_currentsettingselem) _currentsettingselem.classList.remove('act');
+    _currentsettingselem = elem;
+    elem.classList.add('act');
+
+    const custumization = document.getElementById('custumization');
+    custumization.innerHTML = '';
+    custumization.innerHTML = `
+        <div class='flexcentercolumn'>
+    <label>Chart Type :</label>
+    <select id='selectplots' onchange='plotevt(this)'> <option>Bar</option><option>Line</option><option>Bubble</option><option>Doughnut</option><option>Pie</option><option>Polar Area</option><option>Radar</option><option>Scatter</option>
+    </select>
+    </div>
+
+    <div class='flexcentercolumn'>
+    <label style='margin-bottom:8px;'><input type='checkbox' onchange='togglecolumn(this)' ${isColumn(elem) ? 'checked' : ''}/> Column</label>
+    </div>
+    <div class='flexcentercolumn'>
+        <label>Value :</label>
+        <select id='valuesselection' onchange='setvalue(this)' ${isColumn(elem) ? 'disabled' : ''}>
+        </select>
+    </div>
+        `
+        rendervaldropdwn(elem);
+}
+
+function plotevt(parent) {
+    if(display) display.destroy();
+
+    console.log('plotevt', parent.value);
+    if(parent.value == 'Polar Area') {
+        chartform.type = 'polarArea';
+    } else {
+        chartform.type = parent.value.toLowerCase();
+    }
+    display = new Chart('activechart', chartform);
+
+}
+
+
+function getrandomcolors(count) {
+    let colors=[];
+    for(let i = 0;i<count;i++) colors.push(`#${Math.floor(Math.random() * 0xFFFFFF).toString(0x10)}`);
+    return colors;
 }

@@ -76,7 +76,7 @@ router.post("/api/open", (req, res) => {
             res.status(401);
             return res.send('401');
         }
-        console.log(result);
+        // console.log(result);
         res.json({settings: result, file: fs.readFileSync(`./uploads/${result.ID}`).toString()});
     })
 })
@@ -86,13 +86,18 @@ router.get('/dashboard', (req, res) => {
 
     mysql.query("SELECT * FROM data WHERE account_id=?", [req.cookies.get("accid")], (err, result) => {
         if(err) throw err;
-        console.log(result);        
+        // console.log(result);        
         res.render('dashboard', {
             files: result
         });
 
     })
 
+})
+
+router.get('/files/:file', (req, res) => {
+    if(!req.params.file) res.send('401');
+    res.send(fs.readFileSync(`./uploads/${req.params.file}`).toString());
 })
 
 module.exports = router;
